@@ -6,18 +6,27 @@ export class Line extends FabricLine {
   private static semiActiveShadow: string | Shadow;
   private static activeShadow: string | Shadow;
   private static color: string;
+  private static lineWidth: number;
   public source: Node;
   public target: Node;
 
   constructor(
     source: Node,
-    target: Node,
-    lineWidth: number,
-    lineShadow: string | Shadow
+    target: Node
   ) {
+    let lineShadow: string | Shadow; 
+    if(source.isCompleted){
+      if(target.isCompleted){
+        lineShadow = Line.activeShadow;
+      }else{
+        lineShadow = Line.semiActiveShadow;
+      }
+    }else{
+      lineShadow = Line.inactiveShadow;
+    }
     super([source.left, source.top, target.left, target.top], {
       stroke: Line.color,
-      strokeWidth: lineWidth,
+      strokeWidth: Line.lineWidth,
       selectable: false,
       evented: false,
       shadow: lineShadow,

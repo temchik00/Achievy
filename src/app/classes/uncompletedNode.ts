@@ -22,7 +22,7 @@ export class UncompletedNode extends Node {
     state: NodeStates = NodeStates.Idle,
     label?: Label
   ) {
-    super(id, name, description, posX, posY, true, state, label);
+    super(id, name, description, posX, posY, false, state, label);
     if (state === NodeStates.Idle) {
       this.setShadow(UncompletedNode.idleShadow);
       this.set('stroke', UncompletedNode.idleStroke);
