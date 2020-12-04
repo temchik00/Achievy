@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Comic Sans';
+    src: url(assets/fonts/comic.ttf);
+}
+html{
+    background-color: #404040;
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    margin: 0px;
+}

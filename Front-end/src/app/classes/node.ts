@@ -1,4 +1,5 @@
-import { Circle, Canvas, Pattern, Gradient } from 'fabric/fabric-impl';
+import { fabric } from 'fabric';
+import { LinkInfo } from './graph';
 import { Label } from './label';
 import { Line } from './line';
 
@@ -8,11 +9,11 @@ export enum NodeStates {
   Active,
 }
 
-export abstract class Node extends Circle {
+export abstract class Node extends fabric.Circle {
   protected static idleSize: number;
   protected static activeSize: number;
-  protected static fill: string | Pattern | Gradient;
-  protected static canvas: Canvas;
+  protected static fill: string | fabric.Pattern | fabric.Gradient;
+  protected static canvas: fabric.Canvas;
 
   public label: Label;
   public id: number;
@@ -52,6 +53,10 @@ export abstract class Node extends Circle {
       hasBorders: false,
       hasRotatingPoint: false,
     });
+    this.parents = new Array<Node>();
+    this.childs = new Array<Node>();
+    this.linesChild = new Array<Line>();
+    this.linesParent = new Array<Line>();
     this.id = id;
     this.nodeName = name;
     this.description = description;
@@ -75,8 +80,8 @@ export abstract class Node extends Circle {
   public static InitNode(
     idleSize: number,
     activeSize: number,
-    fill: string | Pattern | Gradient,
-    canvas: Canvas
+    fill: string | fabric.Pattern | fabric.Gradient,
+    canvas: fabric.Canvas
   ) {
     Node.idleSize = idleSize;
     Node.activeSize = activeSize;

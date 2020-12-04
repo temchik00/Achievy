@@ -1,10 +1,10 @@
-import { Line as FabricLine, Shadow } from 'fabric/fabric-impl';
+import { fabric } from 'fabric';
 import { Node } from './node';
 
-export class Line extends FabricLine {
-  private static inactiveShadow: string | Shadow;
-  private static semiActiveShadow: string | Shadow;
-  private static activeShadow: string | Shadow;
+export class Line extends fabric.Line {
+  private static inactiveShadow: string | fabric.Shadow;
+  private static semiActiveShadow: string | fabric.Shadow;
+  private static activeShadow: string | fabric.Shadow;
   private static color: string;
   private static lineWidth: number;
   public source: Node;
@@ -14,7 +14,7 @@ export class Line extends FabricLine {
     source: Node,
     target: Node
   ) {
-    let lineShadow: string | Shadow; 
+    let lineShadow: string | fabric.Shadow; 
     if(source.isCompleted){
       if(target.isCompleted){
         lineShadow = Line.activeShadow;
@@ -36,15 +36,17 @@ export class Line extends FabricLine {
   }
 
   public static Init(
-    inactiveShadow: string | Shadow,
-    semiActiveShadow: string | Shadow,
-    activeShadow: string | Shadow,
-    color: string
+    inactiveShadow: string | fabric.Shadow,
+    semiActiveShadow: string | fabric.Shadow,
+    activeShadow: string | fabric.Shadow,
+    color: string,
+    width: number
   ): void {
     Line.inactiveShadow = inactiveShadow;
     Line.semiActiveShadow = semiActiveShadow;
     Line.activeShadow = activeShadow;
     Line.color = color;
+    Line.lineWidth = width;
   }
 
   public SetActive(): void {

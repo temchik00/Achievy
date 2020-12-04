@@ -1,0 +1,41 @@
+body {
+    overflow: hidden;
+}
+  
+.wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.canvas-wrapper {
+    height: 100vh;
+    width: 100vw;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.sidepannel {
+    position: fixed; /* положение */
+    top: 100px; /* отступ сверху */
+    left: 0px; /* отступ слева */
+    background: #505050;
+    background-color: rgb(80, 80, 80); /* цвет фона */
+    color: #bbb; /* цвет текста */
+    width: 200px; /* ширина блока */
+    height: 80vh; /* высота блока */
+    padding: 10px; /* отступы от границ внутри блока */
+    text-align: left; /* выравнивание текста */
+  
+    -webkit-transition-duration: 0.3s; /* анимационное выдвижение для всех браузеров*/
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  
+    -webkit-border-radius: 0 5px 5px 0; /* закругление границ для всех браузеров*/
+    -moz-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+}
