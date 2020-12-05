@@ -7,10 +7,18 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="sidepannel">
-            <div class="header-wrapper">some text</div>
-            <div class="text-wrapper">some text</div>
-            <div class="button-wrapper">some text</div>
+        <div class="sidepanel" [ngStyle]="{
+            'left': graph.activeNode == null ? '-220px' : '0px'
+            }">
+            <ng-template [ngIf]="graph.activeNode != null">
+                <div class="header-wrapper">
+                    <span class="header">{{graph.activeNode.nodeName}}</span>
+                    <span class="closeButton" (click)="closeSidePanel()">X</span>
+                </div>
+                <div class="description-header">Описание:</div>
+                <div class="description-wrapper">{{graph.activeNode.description}}</div>
+                <button [ngClass]="buttonClassSelector()" (click)="toggleSelectedNode()">{{graph.activeNode.isCompleted === true ? "Undone" : "Done"}}</button>
+            </ng-template>
         </div>
         <div class="canvas-wrapper">
             <canvas id="canvas" width="512" height="512"></canvas>

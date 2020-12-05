@@ -18,10 +18,10 @@ canvas {
     display: block;
 }
 
-.sidepannel {
+.sidepanel {
+    z-index: 1;
     position: fixed; /* положение */
     top: 100px; /* отступ сверху */
-    left: 0px; /* отступ слева */
     background: #505050;
     background-color: rgb(80, 80, 80); /* цвет фона */
     color: #bbb; /* цвет текста */
@@ -39,3 +39,79 @@ canvas {
     -moz-border-radius: 0 5px 5px 0;
     border-radius: 0 5px 5px 0;
 }
+
+.closeButton {
+    float: right;
+    text-shadow: none;
+    outline: 0;
+    cursor: pointer;
+}
+
+.header-wrapper{
+    margin-bottom: 5px;
+}
+.header{
+    font-size: 2.5em;
+}
+
+.description-header{
+    font-size: 1.7em;
+    margin-bottom: 3px;
+}
+
+.description-wrapper{
+    font-family: 'ComicSans';
+    overflow-y: auto;
+    height: 68vh;
+}
+
+.doneButton{
+    margin-top: 5px;
+    background-color: #8b0000;
+    border-color: #730000;
+    width: 195px;
+    height: 30px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.doneButton:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.undoneButton{
+    margin-top: 5px;
+    background-color: #6c757d;
+    border-color: #545b62;
+    width: 195px;
+    height: 30px;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.undoneButton:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    background-color: rgb(80, 80, 80);
+    width: 4px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #333;
+  }

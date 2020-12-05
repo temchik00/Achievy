@@ -1,0 +1,518 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>achievy-angular documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">achievy-angular documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>GraphInfo</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/classes/graph.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface that represents information about whole graph.</p>
+
+            </p>
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#links">links</a>
+                                </li>
+                                <li>
+                                        <a href="#nodes">nodes</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="links"></a>
+                                        <span class="name"><b>links</b><a href="#links"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>links:         <code><a href="../interfaces/LinkInfo.html" target="_self" >LinkInfo[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/LinkInfo.html" target="_self" >LinkInfo[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nodes"></a>
+                                        <span class="name"><b>nodes</b><a href="#nodes"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nodes:         <code><a href="../interfaces/NodeInfo.html" target="_self" >NodeInfo[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/NodeInfo.html" target="_self" >NodeInfo[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UncompletedNode } from &quot;./uncompletedNode&quot;;
+import { CompletedNode } from &quot;./completedNode&quot;;
+import { Node, NodeStates } from &quot;./node&quot;;
+import { Line } from &quot;./line&quot;;
+import { fabric } from &quot;fabric&quot;;
+
+/**
+ * Interface that represents information about node.
+ */
+export interface NodeInfo{
+    &quot;id&quot;: number,
+    &quot;x&quot;: number,
+    &quot;y&quot;: number,
+    &quot;label&quot;: string,
+    &quot;description&quot;: string
+}
+
+/**
+ * Interface that represents information about link.
+ */
+export interface LinkInfo{
+    &quot;sourceId&quot;: number,
+    &quot;targetId&quot;: number
+}
+
+/**
+ * Interface that represents information about whole graph.
+ */
+export interface GraphInfo{
+    &quot;nodes&quot;: NodeInfo[],
+    &quot;links&quot;: LinkInfo[]
+}
+
+/**
+ * Class that represents graph.
+ */
+export class Graph {
+    /**
+     * Array that contains all nodes.
+     */
+    private nodes: Array&lt;Node&gt;;
+    /**
+     * Node that is currently selected.
+     */
+    public activeNode: Node;
+    /**
+     * Canvas on which objects are drawn.
+     */
+    private canvas: fabric.Canvas;
+    /**
+     * Shows if canvas is panning.
+     */
+    private isPanning: boolean;
+    /**
+     * Last X position of the cursor when panning.
+     */
+    private lastPosX: number;
+    /**
+     * Last Y position of the cursor when panning.
+     */
+    private lastPosY: number;
+    
+    /**
+     * Constructor of the graph
+     * @param {GraphInfo} graphInfo All info about graph.
+     * @param {Set&lt;number&gt;} completedNodeIds All completed nodes&#x27; ids
+     * @param {fabric.Canvas} canvas Canvas on which objects are drawn.
+     */
+    constructor(graphInfo: GraphInfo, completedNodeIds: Set&lt;number&gt;, canvas: fabric.Canvas){
+        this.nodes &#x3D; new Array&lt;Node&gt;();
+        this.canvas &#x3D; canvas;
+        this.activeNode &#x3D; null;
+        /**
+         * Creating all nodes.
+         */
+        graphInfo.nodes.forEach(nodeInfo &#x3D;&gt; {
+            let node: Node;
+            if (completedNodeIds.has(nodeInfo.id)){
+                node &#x3D; new CompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
+            }
+            else{
+                node &#x3D; new UncompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
+            }
+
+            /**
+             * Sets node behavior on mouse click.
+             * @param event 
+             */
+            let mouseClick &#x3D; (event) &#x3D;&gt; {
+                if(this.activeNode !&#x3D; null &amp;&amp; this.activeNode !&#x3D; node){
+                    this.activeNode.SetIdle();
+                }
+                node.SetActive();
+                this.activeNode &#x3D; node;
+            }
+            mouseClick &#x3D; mouseClick.bind(this, node);
+            node.on(&quot;mouseup&quot;, mouseClick);
+
+            /**
+             * Sets node behavior on mouse hover.
+             * @param event 
+             */
+            let mouseHover &#x3D; (event) &#x3D;&gt;{
+                if(node.state &#x3D;&#x3D; NodeStates.Idle){
+                    node.SetHover();
+                }
+            }
+            mouseHover.bind(this, node);
+
+            /**
+             * Sets node behavior on mouse leaving it.
+             * @param event 
+             */
+            let mouseUnHover &#x3D; (event) &#x3D;&gt;{
+                if(node.state &#x3D;&#x3D; NodeStates.Hover){
+                    node.SetIdle();
+                }
+            }
+            mouseUnHover.bind(this, node);
+            node.on(&quot;mouseover&quot;, mouseHover);
+            node.on(&quot;mouseout&quot;, mouseUnHover);
+
+            this.nodes.push(node);
+            this.canvas.add(node);
+            this.canvas.add(node.label);
+        });
+
+        /**
+         * Creating all lines.
+         */
+        graphInfo.links.forEach(linkInfo &#x3D;&gt; {
+            let sourceId: number &#x3D; this.nodes.findIndex( (node: Node, index: number, arr: Node[]) &#x3D;&gt;{
+                return node.id &#x3D;&#x3D;&#x3D; linkInfo.sourceId;
+            });
+            let targetId: number &#x3D; this.nodes.findIndex( (node: Node, index: number, arr: Node[]) &#x3D;&gt;{
+                return node.id &#x3D;&#x3D;&#x3D; linkInfo.targetId;
+            });
+            let line: Line &#x3D; new Line(this.nodes[sourceId], this.nodes[targetId]);
+            this.nodes[sourceId].AddChild(this.nodes[targetId]);
+            this.nodes[sourceId].AddChildLine(line);
+            this.nodes[targetId].AddParent(this.nodes[sourceId]);
+            this.nodes[targetId].AddParentLine(line);
+            this.canvas.add(line);
+            line.sendToBack();
+        });
+
+        /**
+         * Sets canvas&#x27;s resizing.
+         */
+        let resize &#x3D; () &#x3D;&gt; {
+            let viewportWidth &#x3D; window.innerWidth;
+            let viewportHeight &#x3D; window.innerHeight;
+            canvas.setWidth(viewportWidth);
+            canvas.setHeight(viewportHeight);
+            canvas.calcOffset();
+        };
+        resize &#x3D; resize.bind(this);
+        this.canvas.on(&quot;before:render&quot;, resize);
+
+        /**
+         * Sets canvas&#x27;s behavior on mouse scroll.
+         * @param opt 
+         */
+        let zoom &#x3D; (opt) &#x3D;&gt; {
+            let delta &#x3D; opt.e.deltaY;
+            let zoom &#x3D; this.canvas.getZoom();
+            zoom &#x3D; zoom - delta / 1000;
+            if (zoom &gt; 1.5) zoom &#x3D; 1.5;
+            if (zoom &lt; 0.3) zoom &#x3D; 0.3;
+            this.canvas.zoomToPoint(new fabric.Point(opt.e.offsetX, opt.e.offsetY), zoom);
+            opt.e.preventDefault();
+            opt.e.stopPropagation();
+        };
+        zoom &#x3D; zoom.bind(this);
+        this.canvas.on(&quot;mouse:wheel&quot;, zoom);
+        
+        /**
+         * Sets canvas&#x27;s behavior on mouse down.
+         * @param opt 
+         */
+        let startPanning &#x3D; (opt) &#x3D;&gt; {
+            let evt &#x3D; opt.e;
+            if (opt.target &#x3D;&#x3D; null) {
+                this.isPanning &#x3D; true;
+                this.lastPosX &#x3D; evt.clientX;
+                this.lastPosY &#x3D; evt.clientY;
+            }
+        };
+        startPanning.bind(this);
+
+        /**
+         * Sets canvas&#x27;s behavior when panning.
+         * @param opt 
+         */
+        let pan &#x3D; (opt) &#x3D;&gt; {
+            if (this.isPanning) {
+                let evt &#x3D; opt.e;
+                this.canvas.viewportTransform[4] +&#x3D; evt.clientX - this.lastPosX;
+                this.canvas.viewportTransform[5] +&#x3D; evt.clientY - this.lastPosY;
+                this.lastPosX &#x3D; evt.clientX;
+                this.lastPosY &#x3D; evt.clientY;
+                this.canvas.forEachObject((obj) &#x3D;&gt; {
+                  obj.setCoords();
+                });
+                this.canvas.requestRenderAll();
+            }
+        };
+        pan &#x3D; pan.bind(this);
+
+        /**
+         * Sets canvas&#x27;s behavior on mouse up.
+         * @param opt 
+         */
+        let stopPanning &#x3D; (opt) &#x3D;&gt; {
+            this.isPanning &#x3D; false;
+        }
+        stopPanning &#x3D; stopPanning.bind(this);
+        this.canvas.on(&quot;mouse:down&quot;, startPanning);
+        this.canvas.on(&quot;mouse:up&quot;, stopPanning);
+        this.canvas.on(&quot;mouse:move&quot;, pan);
+
+        
+        this.canvas.renderAll();
+    }
+
+    /**
+     * Tries to toggle selected node.
+     * @returns {boolean} Whether it was successfull.
+     */
+    public toggleActiveNode(): boolean{
+        if(this.activeNode.CanBeToggled()){
+            let newNode:Node &#x3D; this.activeNode.Toggle();
+            
+            /**
+             * Sets node behavior on mouse click.
+             * @param event 
+             */
+            let mouseClick &#x3D; (event) &#x3D;&gt; {
+                if(this.activeNode !&#x3D; null &amp;&amp; this.activeNode !&#x3D; newNode){
+                    this.activeNode.SetIdle();
+                }
+                newNode.SetActive();
+                this.activeNode &#x3D; newNode;
+            }
+            mouseClick &#x3D; mouseClick.bind(this, newNode);
+            newNode.on(&quot;mouseup&quot;, mouseClick);
+
+            /**
+             * Sets node behavior on mouse hover.
+             * @param event 
+             */
+            let mouseHover &#x3D; (event) &#x3D;&gt;{
+                if(newNode.state &#x3D;&#x3D; NodeStates.Idle){
+                    newNode.SetHover();
+                }
+            }
+            mouseHover.bind(this, newNode);
+            
+            /**
+             * Sets node behavior on mouse leaving it.
+             * @param event 
+             */
+            let mouseUnHover &#x3D; (event) &#x3D;&gt;{
+                if(newNode.state &#x3D;&#x3D; NodeStates.Hover){
+                    newNode.SetIdle();
+                }
+            }
+            mouseUnHover.bind(this, newNode);
+            newNode.on(&quot;mouseover&quot;, mouseHover);
+            newNode.on(&quot;mouseout&quot;, mouseUnHover);
+
+            /**
+             * Stops rendering old node.
+             */
+            this.canvas.remove(this.activeNode);
+            this.canvas.remove(this.activeNode.label);
+            /**
+             * Starts rendering new node.
+             */
+            this.canvas.add(newNode);
+            this.canvas.add(newNode.label);
+            this.nodes.splice(this.nodes.indexOf(this.activeNode), 1);
+            delete this.activeNode;
+            this.nodes.push(newNode);
+            this.activeNode &#x3D; newNode;
+            this.canvas.requestRenderAll();
+        }else{
+            return false
+        }
+    }
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'GraphInfo.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
