@@ -3,6 +3,7 @@ import { Node, NodeStates } from './node';
 import { CompletedNode } from './completedNode';
 import { Line } from './line';
 import { Label } from './label';
+import { NodeWrapper } from './node-wrapper';
 
 /**
  * Class that represents uncompleted node.
@@ -61,8 +62,8 @@ export class UncompletedNode extends Node {
     label?: Label,
     linesIn?: Array<Line>,
     linesOut?: Array<Line>,
-    parents?: Array<Node>,
-    childs?: Array<Node>
+    parents?: Array<NodeWrapper>,
+    childs?: Array<NodeWrapper>
   ) {
     super(id, name, description, posX, posY, false, state, label);
     if (state === NodeStates.Idle) {
@@ -111,30 +112,6 @@ export class UncompletedNode extends Node {
   }
 
   /**
-   * Updates visuals of all lines.
-   */
-  protected UpdateLines(): void {
-    for (let i = 0; i < this.linesChild.length; i++) {
-      const line: Line = this.linesChild[i];
-      switch (line.target.isCompleted) {
-        case true:
-          line.SetActive();
-          break;
-        case false:
-          line.SetSemiActive();
-          break;
-      }
-    }
-
-    for (let i = 0; i < this.linesParent.length; i++) {
-      const line: Line = this.linesParent[i];
-      if (line.source.isCompleted === true) {
-        line.SetActive();
-      }
-    }
-  }
-
-  /**
    * Shows whether the node can be completed or not
    * @returns {boolean} Can the node be completed.
    */
@@ -145,7 +122,7 @@ export class UncompletedNode extends Node {
      * If there is at least one parent node that is completed, it can be completed.
      */
     for (let index = 0; index < this.parents.length; index++) {
-      if(this.parents[index].isCompleted === true){
+      if(this.parents[index].node.isCompleted === true){
         return true;
       }
     }
@@ -160,10 +137,6 @@ export class UncompletedNode extends Node {
     if (!this.CanBeToggled()) {
       return null;
     }
-    /**
-     * Updates visuals of lines.
-     */
-    this.UpdateLines();
     /**
      * Updates visuals of label.
      */
@@ -184,21 +157,6 @@ export class UncompletedNode extends Node {
       this.parents,
       this.childs
     );
-    /**
-     * Updates all references to this node so they lead to new one.
-     */
-    for (let i = 0; i < this.linesChild.length; i++) {
-      this.linesChild[i].source = completedNode;
-    }
-    for (let i = 0; i < this.linesParent.length; i++) {
-      this.linesParent[i].target = completedNode;
-    }
-    for (let index = 0; index < this.parents.length; index++) {
-      this.parents[index].replaceChild(this, completedNode)
-    }
-    for (let index = 0; index < this.childs.length; index++) {
-      this.childs[index].replaceParent(this, completedNode)
-    }
     return completedNode;
   }
 

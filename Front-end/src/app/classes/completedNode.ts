@@ -3,6 +3,7 @@ import { Node, NodeStates } from './node';
 import { UncompletedNode } from './uncompletedNode';
 import { Line } from './line';
 import { Label } from './label';
+import { NodeWrapper } from './node-wrapper';
 
 /**
  * Class that represents completed node.
@@ -49,8 +50,8 @@ export class CompletedNode extends Node {
     label?: Label,
     linesIn?: Array<Line>,
     linesOut?: Array<Line>,
-    parents?: Array<Node>,
-    childs?: Array<Node>
+    parents?: Array<NodeWrapper>,
+    childs?: Array<NodeWrapper>
   ) {
     super(id, name, description, posX, posY, true, state, label);
     this.setShadow(CompletedNode.shadow);
@@ -89,34 +90,18 @@ export class CompletedNode extends Node {
   }
   
   /**
-   * Updates visuals of all lines.
-   */
-  protected UpdateLines(): void {
-    for (let i = 0; i < this.linesChild.length; i++) {
-      this.linesChild[i].SetInactive();
-    }
-
-    for (let i = 0; i < this.linesParent.length; i++) {
-      const line: Line = this.linesParent[i];
-      if (line.source.isCompleted === true) {
-        line.SetSemiActive();
-      }
-    }
-  }
-  
-  /**
    * Shows whether the node can be uncompleted or not
    * @returns {boolean} Can the node be uncompleted.
    */
   public CanBeToggled(): boolean {
     for (let i = 0; i < this.childs.length; i++) {
-      if (this.childs[i].isCompleted === false) {
+      if (this.childs[i].node.isCompleted === false) {
         continue;
       }
-      const child: Node = this.childs[i];
+      const child: Node = this.childs[i].node;
       let depends: boolean = true;
       for (let j = 0; j < child.parents.length; j++) {
-        const parent: Node = child.parents[j];
+        const parent: Node = child.parents[j].node;
         if (parent != this && parent.isCompleted === true) {
           depends = false;
           break;
@@ -137,7 +122,6 @@ export class CompletedNode extends Node {
     if (!this.CanBeToggled()) {
       return null;
     }
-    this.UpdateLines();
     this.label.SetUncompleted();
     let uncompletedNode = new UncompletedNode(
       this.id,
@@ -152,27 +136,6 @@ export class CompletedNode extends Node {
       this.parents,
       this.childs
     );
-
-    /**
-     * Updates all references to this node so they lead to new one.
-     */
-    for (let i = 0; i < this.linesChild.length; i++) {
-      this.linesChild[i].source = uncompletedNode;
-    }
-    for (let i = 0; i < this.linesParent.length; i++) {
-      this.linesParent[i].target = uncompletedNode;
-    }
-    let replace = (element:Node) => {
-      element.replaceParent(this, uncompletedNode);
-    }
-    replace = replace.bind(this, uncompletedNode);
-    this.childs.forEach(replace);
-
-    replace = (element:Node) => {
-      element.replaceChild(this, uncompletedNode);
-    }
-    replace = replace.bind(this, uncompletedNode);
-    this.parents.forEach(replace);
     return uncompletedNode;
   }
 

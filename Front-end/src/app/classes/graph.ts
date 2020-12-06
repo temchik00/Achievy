@@ -1,8 +1,7 @@
-import { UncompletedNode } from "./uncompletedNode";
-import { CompletedNode } from "./completedNode";
-import { Node, NodeStates } from "./node";
+import { NodeStates } from "./node";
 import { Line } from "./line";
 import { fabric } from "fabric";
+import { NodeWrapper } from './node-wrapper';
 
 /**
  * Interface that represents information about node.
@@ -12,7 +11,8 @@ export interface NodeInfo{
     "x": number,
     "y": number,
     "label": string,
-    "description": string
+    "description": string,
+    "isCompleted": boolean
 }
 
 /**
@@ -38,11 +38,11 @@ export class Graph {
     /**
      * Array that contains all nodes.
      */
-    private nodes: Array<Node>;
+    private nodes: Array<NodeWrapper>;
     /**
      * Node that is currently selected.
      */
-    public activeNode: Node;
+    public activeNode: NodeWrapper;
     /**
      * Canvas on which objects are drawn.
      */
@@ -66,80 +66,62 @@ export class Graph {
      * @param {Set<number>} completedNodeIds All completed nodes' ids
      * @param {fabric.Canvas} canvas Canvas on which objects are drawn.
      */
-    constructor(graphInfo: GraphInfo, completedNodeIds: Set<number>, canvas: fabric.Canvas){
-        this.nodes = new Array<Node>();
+    constructor(graphInfo: GraphInfo, canvas: fabric.Canvas){
+        this.nodes = new Array<NodeWrapper>();
         this.canvas = canvas;
         this.activeNode = null;
         /**
          * Creating all nodes.
          */
         graphInfo.nodes.forEach(nodeInfo => {
-            let node: Node;
-            if (completedNodeIds.has(nodeInfo.id)){
-                node = new CompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
-            }
-            else{
-                node = new UncompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
-            }
+            let node: NodeWrapper = new NodeWrapper(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y, nodeInfo.isCompleted);
 
-            /**
-             * Sets node behavior on mouse click.
-             * @param event 
-             */
             let mouseClick = (event) => {
                 if(this.activeNode != null && this.activeNode != node){
-                    this.activeNode.SetIdle();
+                    this.activeNode.node.SetIdle();
                 }
-                node.SetActive();
+                node.node.SetActive();
                 this.activeNode = node;
             }
             mouseClick = mouseClick.bind(this, node);
-            node.on("mouseup", mouseClick);
+            node.node.on("mouseup", mouseClick);
 
-            /**
-             * Sets node behavior on mouse hover.
-             * @param event 
-             */
             let mouseHover = (event) =>{
-                if(node.state == NodeStates.Idle){
-                    node.SetHover();
+                if(node.node.state == NodeStates.Idle){
+                    node.node.SetHover();
                 }
             }
-            mouseHover.bind(this, node);
+            mouseHover = mouseHover.bind(this, node);
+            node.node.on("mouseover", mouseHover);
 
-            /**
-             * Sets node behavior on mouse leaving it.
-             * @param event 
-             */
-            let mouseUnHover = (event) =>{
-                if(node.state == NodeStates.Hover){
-                    node.SetIdle();
+            let mouseLeave = (event) =>{
+                if(node.node.state == NodeStates.Hover){
+                    node.node.SetIdle();
                 }
             }
-            mouseUnHover.bind(this, node);
-            node.on("mouseover", mouseHover);
-            node.on("mouseout", mouseUnHover);
+            mouseLeave = mouseLeave.bind(this, node);
+            node.node.on("mouseout", mouseLeave);
 
             this.nodes.push(node);
-            this.canvas.add(node);
-            this.canvas.add(node.label);
+            this.canvas.add(node.node);
+            this.canvas.add(node.node.label);
         });
 
         /**
          * Creating all lines.
          */
         graphInfo.links.forEach(linkInfo => {
-            let sourceId: number = this.nodes.findIndex( (node: Node, index: number, arr: Node[]) =>{
-                return node.id === linkInfo.sourceId;
+            let sourceId: number = this.nodes.findIndex( (node: NodeWrapper) =>{
+                return node.node.id === linkInfo.sourceId;
             });
-            let targetId: number = this.nodes.findIndex( (node: Node, index: number, arr: Node[]) =>{
-                return node.id === linkInfo.targetId;
+            let targetId: number = this.nodes.findIndex( (node: NodeWrapper) =>{
+                return node.node.id === linkInfo.targetId;
             });
             let line: Line = new Line(this.nodes[sourceId], this.nodes[targetId]);
-            this.nodes[sourceId].AddChild(this.nodes[targetId]);
-            this.nodes[sourceId].AddChildLine(line);
-            this.nodes[targetId].AddParent(this.nodes[sourceId]);
-            this.nodes[targetId].AddParentLine(line);
+            this.nodes[sourceId].node.AddChild(this.nodes[targetId]);
+            this.nodes[sourceId].node.AddChildLine(line);
+            this.nodes[targetId].node.AddParent(this.nodes[sourceId]);
+            this.nodes[targetId].node.AddParentLine(line);
             this.canvas.add(line);
             line.sendToBack();
         });
@@ -228,61 +210,35 @@ export class Graph {
      * @returns {boolean} Whether it was successfull.
      */
     public toggleActiveNode(): boolean{
-        if(this.activeNode.CanBeToggled()){
-            let newNode:Node = this.activeNode.Toggle();
-            
-            /**
-             * Sets node behavior on mouse click.
-             * @param event 
-             */
+        if(this.activeNode.node.CanBeToggled()){
+            this.activeNode.Toggle(this.canvas);
+            let node = this.activeNode;
+
             let mouseClick = (event) => {
-                if(this.activeNode != null && this.activeNode != newNode){
-                    this.activeNode.SetIdle();
+                if(this.activeNode != null && this.activeNode != node){
+                    this.activeNode.node.SetIdle();
                 }
-                newNode.SetActive();
-                this.activeNode = newNode;
+                node.node.SetActive();
+                this.activeNode = node;
             }
-            mouseClick = mouseClick.bind(this, newNode);
-            newNode.on("mouseup", mouseClick);
+            mouseClick = mouseClick.bind(this, node);
+            this.activeNode.node.on("mouseup", mouseClick);
 
-            /**
-             * Sets node behavior on mouse hover.
-             * @param event 
-             */
             let mouseHover = (event) =>{
-                if(newNode.state == NodeStates.Idle){
-                    newNode.SetHover();
+                if(node.node.state == NodeStates.Idle){
+                    node.node.SetHover();
                 }
             }
-            mouseHover.bind(this, newNode);
-            
-            /**
-             * Sets node behavior on mouse leaving it.
-             * @param event 
-             */
-            let mouseUnHover = (event) =>{
-                if(newNode.state == NodeStates.Hover){
-                    newNode.SetIdle();
-                }
-            }
-            mouseUnHover.bind(this, newNode);
-            newNode.on("mouseover", mouseHover);
-            newNode.on("mouseout", mouseUnHover);
+            mouseHover = mouseHover.bind(this, node);
+            this.activeNode.node.on("mouseover", mouseHover);
 
-            /**
-             * Stops rendering old node.
-             */
-            this.canvas.remove(this.activeNode);
-            this.canvas.remove(this.activeNode.label);
-            /**
-             * Starts rendering new node.
-             */
-            this.canvas.add(newNode);
-            this.canvas.add(newNode.label);
-            this.nodes.splice(this.nodes.indexOf(this.activeNode), 1);
-            delete this.activeNode;
-            this.nodes.push(newNode);
-            this.activeNode = newNode;
+            let mouseLeave = (event) =>{
+                if(node.node.state == NodeStates.Hover){
+                    node.node.SetIdle();
+                }
+            }
+            mouseLeave = mouseLeave.bind(this, node);
+            this.activeNode.node.on("mouseout", mouseLeave);
             this.canvas.requestRenderAll();
         }else{
             return false

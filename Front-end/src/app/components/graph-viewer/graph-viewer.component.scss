@@ -40,9 +40,37 @@ canvas {
     border-radius: 0 5px 5px 0;
 }
 
+.sideMenu {
+    z-index: 1;
+    position: fixed; /* положение */
+    top: 100px; /* отступ сверху */
+    background: #505050;
+    background-color: rgb(80, 80, 80); /* цвет фона */
+    color: #bbb; /* цвет текста */
+    width: 200px; /* ширина блока */
+    height: 80vh; /* высота блока */
+    padding: 10px; /* отступы от границ внутри блока */
+    text-align: left; /* выравнивание текста */
+  
+    -webkit-transition-duration: 0.3s; /* анимационное выдвижение для всех браузеров*/
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  
+    -webkit-border-radius: 5px 0 0 5px; /* закругление границ для всех браузеров*/
+    -moz-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+
+.menuButton{
+    left:-55px;
+    top:-10px;
+}
+
 .closeButton {
     float: right;
-    text-shadow: none;
+    text-shadow: none !important;
+    box-shadow: none !important;
     outline: 0;
     cursor: pointer;
 }
@@ -62,41 +90,14 @@ canvas {
 .description-wrapper{
     font-family: 'ComicSans';
     overflow-y: auto;
-    height: 68vh;
+    //height: 70.5vh;
+    max-height: 88%;
 }
 
-.doneButton{
+.toggleButton{
     margin-top: 5px;
-    background-color: #8b0000;
-    border-color: #730000;
     width: 195px;
     height: 30px;
-    border-radius: 5px;
-    border-width: 2px;
-    border-style: solid;
-    cursor: pointer;
-}
-
-.doneButton:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
-
-.undoneButton{
-    margin-top: 5px;
-    background-color: #6c757d;
-    border-color: #545b62;
-    width: 195px;
-    height: 30px;
-    border-radius: 5px;
-    border-width: 2px;
-    border-style: solid;
-    cursor: pointer;
-}
-
-.undoneButton:focus {
-    outline: none !important;
-    box-shadow: none !important;
 }
 
 /* width */

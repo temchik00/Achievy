@@ -131,6 +131,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#Login">Login</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
@@ -151,15 +155,45 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/components/authorization/authorization.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/components/authorization/authorization.component.ts:9</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -173,6 +207,47 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Login"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            Login
+                        </b>
+                        <a href="#Login"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>Login()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">src/app/components/authorization/authorization.component.ts:19</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -195,8 +270,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="12"
-                            class="link-to-prism">src/app/components/authorization/authorization.component.ts:12</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">src/app/components/authorization/authorization.component.ts:15</a></div>
                 </td>
             </tr>
 
@@ -219,6 +294,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 
 @Component({
   selector: &#x27;app-authorization&#x27;,
@@ -227,25 +303,82 @@
 })
 export class AuthorizationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    
   }
+
+  public Login(){
+    this.router.navigate([&quot;/graph&quot;]);
+  }
+
+  
 
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;authorization works!&lt;/p&gt;
-</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;html lang&#x3D;&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;
+    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class&#x3D;&quot;formWrapper&quot;&gt;
+        &lt;div class&#x3D;&quot;headerWrapper&quot;&gt;
+            &lt;h1 class&#x3D;&quot;header&quot;&gt;Sign in&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;mat-form-field class&#x3D;&quot;login&quot; color&#x3D;&quot;accent&quot; appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Login&lt;/mat-label&gt;
+            &lt;input matInput&gt;
+        &lt;/mat-form-field&gt;
+        &lt;div&gt;&lt;/div&gt;
+        &lt;mat-form-field class&#x3D;&quot;password&quot; color&#x3D;&quot;accent&quot; appearance&#x3D;&quot;fill&quot;&gt;
+            &lt;mat-label&gt;Password&lt;/mat-label&gt;
+            &lt;input matInput&gt;
+        &lt;/mat-form-field&gt;
+        &lt;div&gt;&lt;/div&gt;
+        &lt;div class&#x3D;&quot;buttonWrapper&quot;&gt;
+            &lt;button mat-flat-button color&#x3D;&quot;accent&quot; class&#x3D;&quot;buttonLogin&quot; (click)&#x3D;&quot;Login()&quot;&gt;Sign in&lt;/button&gt;
+            &lt;button mat-button color&#x3D;&quot;accent&quot; routerLink&#x3D;&quot;registration&quot;&gt;Sign up&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;  
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./authorization.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.formWrapper{
+    margin: auto;
+    width: 200px;
+    text-align: center;
+}
+
+.buttonLogin{
+    margin-right: 10px;
+}
+
+.buttonWrapper{
+    text-align: left;
+}
+
+.headerWrapper{
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.header{
+    font-size: 45px;
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -273,7 +406,7 @@ export class AuthorizationComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>authorization works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Document</title></head><body>    <div class="formWrapper">        <div class="headerWrapper">            <h1 class="header">Sign in</h1>        </div>        <mat-form-field class="login" color="accent" appearance="fill">            <mat-label>Login</mat-label>            <input matInput>        </mat-form-field>        <div></div>        <mat-form-field class="password" color="accent" appearance="fill">            <mat-label>Password</mat-label>            <input matInput>        </mat-form-field>        <div></div>        <div class="buttonWrapper">            <button mat-flat-button color="accent" class="buttonLogin" (click)="Login()">Sign in</button>            <button mat-button color="accent" routerLink="registration">Sign up</button>        </div>    </div>  </body></html></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthorizationComponent', 'selector': 'app-authorization'},{'name': 'GraphViewerComponent', 'selector': 'app-graph-viewer'},{'name': 'RegistrationComponent', 'selector': 'app-registration'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AuthorizationComponent'};

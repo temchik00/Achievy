@@ -185,14 +185,6 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#replaceChild">replaceChild</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#replaceParent">replaceParent</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Abstract</span>
                                 <a href="#SetActive">SetActive</a>
                             </li>
@@ -212,8 +204,7 @@
                                 <a href="#Toggle">Toggle</a>
                             </li>
                             <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
+                                    <span class="modifier">Public</span>
                                 <a href="#UpdateLines">UpdateLines</a>
                             </li>
                         </ul>
@@ -486,7 +477,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Node.html" target="_self" >Array&lt;Node&gt;</a></code>
+                            <i>Type : </i>    <code>Array&lt;NodeWrapper&gt;</code>
 
                         </td>
                     </tr>
@@ -828,7 +819,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Node.html" target="_self" >Array&lt;Node&gt;</a></code>
+                            <i>Type : </i>    <code>Array&lt;NodeWrapper&gt;</code>
 
                         </td>
                     </tr>
@@ -905,15 +896,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>AddChild(childNode: <a href="../classes/Node.html">Node</a>)</code>
+                    <code>AddChild(childNode: <a href="../classes/NodeWrapper.html">NodeWrapper</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="173"
-                            class="link-to-prism">src/app/classes/node.ts:173</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/app/classes/node.ts:172</a></div>
                 </td>
             </tr>
 
@@ -938,7 +929,7 @@
                                 <tr>
                                     <td>childNode</td>
                                     <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
+                                                <code><a href="../classes/NodeWrapper.html" target="_self" >NodeWrapper</a></code>
                                     </td>
 
                                     <td>
@@ -991,8 +982,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="193"
-                            class="link-to-prism">src/app/classes/node.ts:193</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="192"
+                            class="link-to-prism">src/app/classes/node.ts:192</a></div>
                 </td>
             </tr>
 
@@ -1063,7 +1054,7 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>AddParent(parentNode: <a href="../classes/Node.html">Node</a>)</code>
+                    <code>AddParent(parentNode: <a href="../classes/NodeWrapper.html">NodeWrapper</a>)</code>
                 </td>
             </tr>
 
@@ -1096,7 +1087,7 @@
                                 <tr>
                                     <td>parentNode</td>
                                     <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
+                                                <code><a href="../classes/NodeWrapper.html" target="_self" >NodeWrapper</a></code>
                                     </td>
 
                                     <td>
@@ -1149,8 +1140,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="183"
-                            class="link-to-prism">src/app/classes/node.ts:183</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="182"
+                            class="link-to-prism">src/app/classes/node.ts:182</a></div>
                 </td>
             </tr>
 
@@ -1229,8 +1220,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="230"
-                            class="link-to-prism">src/app/classes/node.ts:230</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="215"
+                            class="link-to-prism">src/app/classes/node.ts:215</a></div>
                 </td>
             </tr>
 
@@ -1379,196 +1370,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="replaceChild"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            replaceChild
-                        </b>
-                        <a href="#replaceChild"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>replaceChild(oldValue: <a href="../classes/Node.html">Node</a>, newValue: <a href="../classes/Node.html">Node</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="218"
-                            class="link-to-prism">src/app/classes/node.ts:218</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Replaces one child node with another.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>oldValue</td>
-                                    <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Node that will be replaced.</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>newValue</td>
-                                    <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Node that will replace the previous one.</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="replaceParent"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            replaceParent
-                        </b>
-                        <a href="#replaceParent"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>replaceParent(oldValue: <a href="../classes/Node.html">Node</a>, newValue: <a href="../classes/Node.html">Node</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="204"
-                            class="link-to-prism">src/app/classes/node.ts:204</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Replaces one parent node with another.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>oldValue</td>
-                                    <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Node that will be replaced.</p>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>newValue</td>
-                                    <td>
-                                                <code><a href="../classes/Node.html" target="_self" >Node</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>Node that will replace the previous one.</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="SetActive"></a>
                     <span class="name">
                         <b>
@@ -1590,8 +1391,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="246"
-                            class="link-to-prism">src/app/classes/node.ts:246</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="231"
+                            class="link-to-prism">src/app/classes/node.ts:231</a></div>
                 </td>
             </tr>
 
@@ -1634,8 +1435,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="242"
-                            class="link-to-prism">src/app/classes/node.ts:242</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="227"
+                            class="link-to-prism">src/app/classes/node.ts:227</a></div>
                 </td>
             </tr>
 
@@ -1678,8 +1479,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="238"
-                            class="link-to-prism">src/app/classes/node.ts:238</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="223"
+                            class="link-to-prism">src/app/classes/node.ts:223</a></div>
                 </td>
             </tr>
 
@@ -1722,8 +1523,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="234"
-                            class="link-to-prism">src/app/classes/node.ts:234</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="219"
+                            class="link-to-prism">src/app/classes/node.ts:219</a></div>
                 </td>
             </tr>
 
@@ -1748,8 +1549,7 @@
                     <a name="UpdateLines"></a>
                     <span class="name">
                         <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
+                            <span class="modifier">Public</span>
                             UpdateLines
                         </b>
                         <a href="#UpdateLines"><span class="icon ion-ios-link"></span></a>
@@ -1766,15 +1566,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="226"
-                            class="link-to-prism">src/app/classes/node.ts:226</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="201"
+                            class="link-to-prism">src/app/classes/node.ts:201</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Abstract method to update visuals of all linked lines.</p>
+                    <div class="io-description"><p>Updates visuals of all the lines that are linked with this node.</p>
 </div>
 
                     <div class="io-description">
@@ -1796,9 +1596,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { fabric } from &#x27;fabric&#x27;;
-import { LinkInfo } from &#x27;./graph&#x27;;
 import { Label } from &#x27;./label&#x27;;
 import { Line } from &#x27;./line&#x27;;
+import { NodeWrapper } from &quot;./node-wrapper&quot;;
 
 export enum NodeStates {
   Idle,
@@ -1855,11 +1655,11 @@ export abstract class Node extends fabric.Circle {
   /**
    * Stores all parent nodes of this node.
    */
-  public parents: Array&lt;Node&gt;;
+  public parents: Array&lt;NodeWrapper&gt;;
   /**
    * Stores all children nodes of this node.
    */
-  public childs: Array&lt;Node&gt;;
+  public childs: Array&lt;NodeWrapper&gt;;
   /**
    * Stores all lines that come from parent nodes to this node.
    */
@@ -1906,8 +1706,8 @@ export abstract class Node extends fabric.Circle {
       hasBorders: false,
       hasRotatingPoint: false,
     });
-    this.parents &#x3D; new Array&lt;Node&gt;();
-    this.childs &#x3D; new Array&lt;Node&gt;();
+    this.parents &#x3D; new Array&lt;NodeWrapper&gt;();
+    this.childs &#x3D; new Array&lt;NodeWrapper&gt;();
     this.linesChild &#x3D; new Array&lt;Line&gt;();
     this.linesParent &#x3D; new Array&lt;Line&gt;();
     this.id &#x3D; id;
@@ -1956,18 +1756,17 @@ export abstract class Node extends fabric.Circle {
    * Adds new parent node
    * @param {Node} parentNode New parent node, that will be added.
    */
-  public AddParent(parentNode: Node): void {
+  public AddParent(parentNode: NodeWrapper): void {
     if (!this.parents.includes(parentNode)) {
       this.parents.push(parentNode);
     }
-    console.log(this.parents);
   }
   
   /**
    * Adds new child node
    * @param {Node} childNode New child node, that will be added.
    */
-  public AddChild(childNode: Node): void {
+  public AddChild(childNode: NodeWrapper): void {
     if (!this.childs.includes(childNode)) {
       this.childs.push(childNode);
     }
@@ -1994,33 +1793,19 @@ export abstract class Node extends fabric.Circle {
   }
 
   /**
-   * Replaces one parent node with another.
-   * @param {Node} oldValue Node that will be replaced.
-   * @param {Node} newValue Node that will replace the previous one.
+   * Updates visuals of all the lines that are linked with this node.
    */
-  public replaceParent(oldValue:Node, newValue:Node):void{
-    let replaceIndex &#x3D; this.parents.indexOf(oldValue);
-    console.log(this.parents[replaceIndex]);
-    this.parents[replaceIndex] &#x3D; newValue;
-    console.log(this.parents[replaceIndex]);
-    console.log(replaceIndex);
+  public UpdateLines(): void
+  {
+    for (let i &#x3D; 0; i &lt; this.linesChild.length; i++) {
+      this.linesChild[i].UpdateVisuals();
+    }
+
+    for (let i &#x3D; 0; i &lt; this.linesParent.length; i++) {
+      this.linesParent[i].UpdateVisuals();
+    }
   }
 
-  
-  /**
-   * Replaces one child node with another.
-   * @param {Node} oldValue Node that will be replaced.
-   * @param {Node} newValue Node that will replace the previous one.
-   */
-  public replaceChild(oldValue:Node, newValue:Node):void{
-    let replaceIndex &#x3D; this.childs.indexOf(oldValue);
-    this.childs[replaceIndex] &#x3D; newValue;
-  }
-
-  /**
-   * Abstract method to update visuals of all linked lines.
-   */
-  protected abstract UpdateLines(): void;
   /**
    * Abstract method. It is used to define whether node can be toggled or not.
    */

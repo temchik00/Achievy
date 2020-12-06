@@ -1,1 +1,49 @@
-<p>registration works!</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="formWrapper">
+        <div class="headerWrapper">
+            <h1 class="header">Sign up</h1>
+        </div>
+        <div class="registrationWrapper" [formGroup]="registrationForm">
+            <mat-form-field class="login" color="accent" appearance="fill">
+                <mat-label>Login</mat-label>
+                <input matInput formControlName="login">
+                <mat-error *ngIf="registrationForm.controls.login.hasError('required')">
+                    Login is required
+                </mat-error>
+            </mat-form-field>
+            <div></div>
+            <mat-form-field class="password" color="accent" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="registrationForm.hasError('notSame') && !registrationForm.controls.password.hasError('required')">
+                    Passwords do not match
+                </mat-error> 
+                <mat-error *ngIf="registrationForm.controls.password.hasError('required')">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+            <div></div>
+            <mat-form-field class="password" color="accent" appearance="fill">
+                <mat-label>Repeat password</mat-label>
+                <input matInput formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="registrationForm.controls.confirmPassword.hasError('required')">
+                    Password is required
+                </mat-error>
+                <mat-error *ngIf="registrationForm.hasError('notSame') && !registrationForm.controls.confirmPassword.hasError('required')">
+                    Passwords do not match
+                </mat-error> 
+            </mat-form-field>
+        </div>
+        <div class="buttonWrapper">
+            <button mat-flat-button color="accent" class="buttonRegister" (click)="Register()">Sign up</button>
+            <button mat-button color="accent" routerLink="">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

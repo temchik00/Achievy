@@ -1,7 +1,7 @@
 import { fabric } from 'fabric';
-import { LinkInfo } from './graph';
 import { Label } from './label';
 import { Line } from './line';
+import { NodeWrapper } from "./node-wrapper";
 
 export enum NodeStates {
   Idle,
@@ -58,11 +58,11 @@ export abstract class Node extends fabric.Circle {
   /**
    * Stores all parent nodes of this node.
    */
-  public parents: Array<Node>;
+  public parents: Array<NodeWrapper>;
   /**
    * Stores all children nodes of this node.
    */
-  public childs: Array<Node>;
+  public childs: Array<NodeWrapper>;
   /**
    * Stores all lines that come from parent nodes to this node.
    */
@@ -109,8 +109,8 @@ export abstract class Node extends fabric.Circle {
       hasBorders: false,
       hasRotatingPoint: false,
     });
-    this.parents = new Array<Node>();
-    this.childs = new Array<Node>();
+    this.parents = new Array<NodeWrapper>();
+    this.childs = new Array<NodeWrapper>();
     this.linesChild = new Array<Line>();
     this.linesParent = new Array<Line>();
     this.id = id;
@@ -159,18 +159,17 @@ export abstract class Node extends fabric.Circle {
    * Adds new parent node
    * @param {Node} parentNode New parent node, that will be added.
    */
-  public AddParent(parentNode: Node): void {
+  public AddParent(parentNode: NodeWrapper): void {
     if (!this.parents.includes(parentNode)) {
       this.parents.push(parentNode);
     }
-    console.log(this.parents);
   }
   
   /**
    * Adds new child node
    * @param {Node} childNode New child node, that will be added.
    */
-  public AddChild(childNode: Node): void {
+  public AddChild(childNode: NodeWrapper): void {
     if (!this.childs.includes(childNode)) {
       this.childs.push(childNode);
     }
@@ -197,33 +196,19 @@ export abstract class Node extends fabric.Circle {
   }
 
   /**
-   * Replaces one parent node with another.
-   * @param {Node} oldValue Node that will be replaced.
-   * @param {Node} newValue Node that will replace the previous one.
+   * Updates visuals of all the lines that are linked with this node.
    */
-  public replaceParent(oldValue:Node, newValue:Node):void{
-    let replaceIndex = this.parents.indexOf(oldValue);
-    console.log(this.parents[replaceIndex]);
-    this.parents[replaceIndex] = newValue;
-    console.log(this.parents[replaceIndex]);
-    console.log(replaceIndex);
+  public UpdateLines(): void
+  {
+    for (let i = 0; i < this.linesChild.length; i++) {
+      this.linesChild[i].UpdateVisuals();
+    }
+
+    for (let i = 0; i < this.linesParent.length; i++) {
+      this.linesParent[i].UpdateVisuals();
+    }
   }
 
-  
-  /**
-   * Replaces one child node with another.
-   * @param {Node} oldValue Node that will be replaced.
-   * @param {Node} newValue Node that will replace the previous one.
-   */
-  public replaceChild(oldValue:Node, newValue:Node):void{
-    let replaceIndex = this.childs.indexOf(oldValue);
-    this.childs[replaceIndex] = newValue;
-  }
-
-  /**
-   * Abstract method to update visuals of all linked lines.
-   */
-  protected abstract UpdateLines(): void;
   /**
    * Abstract method. It is used to define whether node can be toggled or not.
    */

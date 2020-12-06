@@ -27,72 +27,80 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content module">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-    <li>Modules</li>
-    <li>AppRoutingModule</li>
+  <li>Injectables</li>
+  <li>HttpHandlerService</li>
 </ol>
 
-
 <ul class="nav nav-tabs" role="tablist">
-    <li  class="active" >
-        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-    </li>
-    <li >
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="c-info">
-
         <p class="comment">
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app-routing.module.ts</code>
+            <code>src/app/shared/http-handler.service.ts</code>
         </p>
 
 
 
 
-        <div class="container-fluid module">
-            <div class="row">
-            </div>
-        </div>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/shared/http-handler.service.ts:6</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
 
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
-import { AuthorizationComponent } from &#x27;./components/authorization/authorization.component&#x27;;
-import { GraphViewerComponent } from &#x27;./components/graph-viewer/graph-viewer.component&#x27;;
-import { RegistrationComponent } from &#x27;./components/registration/registration.component&#x27;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
-const routes: Routes &#x3D; [
-  {path: &#x27;&#x27;, component: AuthorizationComponent},
-  {path: &#x27;graph&#x27;, component: GraphViewerComponent},
-  {path: &#x27;registration&#x27;, component: RegistrationComponent},
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+@Injectable({
+  providedIn: &#x27;root&#x27;
 })
-export class AppRoutingModule { }
+export class HttpHandlerService {
+
+  constructor() { }
+}
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -121,8 +129,8 @@ export class AppRoutingModule { }
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'HttpHandlerService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

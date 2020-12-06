@@ -245,6 +245,12 @@ import { AppComponent } from &#x27;./app.component&#x27;;
 import { GraphViewerComponent } from &#x27;./components/graph-viewer/graph-viewer.component&#x27;;
 import { AuthorizationComponent } from &#x27;./components/authorization/authorization.component&#x27;;
 import { RegistrationComponent } from &#x27;./components/registration/registration.component&#x27;;
+import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
+
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
+import {MatIconModule} from &#x27;@angular/material/icon&#x27;;
+
 
 @NgModule({
   declarations: [
@@ -255,7 +261,11 @@ import { RegistrationComponent } from &#x27;./components/registration/registrati
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -144,7 +144,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(graphInfo: <a href="../interfaces/GraphInfo.html">GraphInfo</a>, completedNodeIds: Set<number>, canvas: fabric.Canvas)</code>
+<code>constructor(graphInfo: <a href="../interfaces/GraphInfo.html">GraphInfo</a>, canvas: fabric.Canvas)</code>
                     </td>
                 </tr>
                         <tr>
@@ -182,22 +182,6 @@
                                                     
                                                         <td>
                                                                 <code><p>All info about graph.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>completedNodeIds</td>
-                                                  
-                                                        <td>
-                                                                    <code>Set&lt;number&gt;</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code><p>All completed nodes&#39; ids</p>
 </code>
                                                         </td>
                                                 </tr>
@@ -246,7 +230,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Node.html" target="_self" >Node</a></code>
+                            <i>Type : </i>        <code><a href="../classes/NodeWrapper.html" target="_self" >NodeWrapper</a></code>
 
                         </td>
                     </tr>
@@ -416,7 +400,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/Node.html" target="_self" >Array&lt;Node&gt;</a></code>
+                            <i>Type : </i>    <code>Array&lt;NodeWrapper&gt;</code>
 
                         </td>
                     </tr>
@@ -466,8 +450,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="230"
-                            class="link-to-prism">src/app/classes/graph.ts:230</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="212"
+                            class="link-to-prism">src/app/classes/graph.ts:212</a></div>
                 </td>
             </tr>
 
@@ -501,11 +485,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UncompletedNode } from &quot;./uncompletedNode&quot;;
-import { CompletedNode } from &quot;./completedNode&quot;;
-import { Node, NodeStates } from &quot;./node&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NodeStates } from &quot;./node&quot;;
 import { Line } from &quot;./line&quot;;
 import { fabric } from &quot;fabric&quot;;
+import { NodeWrapper } from &#x27;./node-wrapper&#x27;;
 
 /**
  * Interface that represents information about node.
@@ -515,7 +498,8 @@ export interface NodeInfo{
     &quot;x&quot;: number,
     &quot;y&quot;: number,
     &quot;label&quot;: string,
-    &quot;description&quot;: string
+    &quot;description&quot;: string,
+    &quot;isCompleted&quot;: boolean
 }
 
 /**
@@ -541,11 +525,11 @@ export class Graph {
     /**
      * Array that contains all nodes.
      */
-    private nodes: Array&lt;Node&gt;;
+    private nodes: Array&lt;NodeWrapper&gt;;
     /**
      * Node that is currently selected.
      */
-    public activeNode: Node;
+    public activeNode: NodeWrapper;
     /**
      * Canvas on which objects are drawn.
      */
@@ -569,80 +553,62 @@ export class Graph {
      * @param {Set&lt;number&gt;} completedNodeIds All completed nodes&#x27; ids
      * @param {fabric.Canvas} canvas Canvas on which objects are drawn.
      */
-    constructor(graphInfo: GraphInfo, completedNodeIds: Set&lt;number&gt;, canvas: fabric.Canvas){
-        this.nodes &#x3D; new Array&lt;Node&gt;();
+    constructor(graphInfo: GraphInfo, canvas: fabric.Canvas){
+        this.nodes &#x3D; new Array&lt;NodeWrapper&gt;();
         this.canvas &#x3D; canvas;
         this.activeNode &#x3D; null;
         /**
          * Creating all nodes.
          */
         graphInfo.nodes.forEach(nodeInfo &#x3D;&gt; {
-            let node: Node;
-            if (completedNodeIds.has(nodeInfo.id)){
-                node &#x3D; new CompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
-            }
-            else{
-                node &#x3D; new UncompletedNode(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y);
-            }
+            let node: NodeWrapper &#x3D; new NodeWrapper(nodeInfo.id, nodeInfo.label, nodeInfo.description, nodeInfo.x, nodeInfo.y, nodeInfo.isCompleted);
 
-            /**
-             * Sets node behavior on mouse click.
-             * @param event 
-             */
             let mouseClick &#x3D; (event) &#x3D;&gt; {
                 if(this.activeNode !&#x3D; null &amp;&amp; this.activeNode !&#x3D; node){
-                    this.activeNode.SetIdle();
+                    this.activeNode.node.SetIdle();
                 }
-                node.SetActive();
+                node.node.SetActive();
                 this.activeNode &#x3D; node;
             }
             mouseClick &#x3D; mouseClick.bind(this, node);
-            node.on(&quot;mouseup&quot;, mouseClick);
+            node.node.on(&quot;mouseup&quot;, mouseClick);
 
-            /**
-             * Sets node behavior on mouse hover.
-             * @param event 
-             */
             let mouseHover &#x3D; (event) &#x3D;&gt;{
-                if(node.state &#x3D;&#x3D; NodeStates.Idle){
-                    node.SetHover();
+                if(node.node.state &#x3D;&#x3D; NodeStates.Idle){
+                    node.node.SetHover();
                 }
             }
-            mouseHover.bind(this, node);
+            mouseHover &#x3D; mouseHover.bind(this, node);
+            node.node.on(&quot;mouseover&quot;, mouseHover);
 
-            /**
-             * Sets node behavior on mouse leaving it.
-             * @param event 
-             */
-            let mouseUnHover &#x3D; (event) &#x3D;&gt;{
-                if(node.state &#x3D;&#x3D; NodeStates.Hover){
-                    node.SetIdle();
+            let mouseLeave &#x3D; (event) &#x3D;&gt;{
+                if(node.node.state &#x3D;&#x3D; NodeStates.Hover){
+                    node.node.SetIdle();
                 }
             }
-            mouseUnHover.bind(this, node);
-            node.on(&quot;mouseover&quot;, mouseHover);
-            node.on(&quot;mouseout&quot;, mouseUnHover);
+            mouseLeave &#x3D; mouseLeave.bind(this, node);
+            node.node.on(&quot;mouseout&quot;, mouseLeave);
 
             this.nodes.push(node);
-            this.canvas.add(node);
-            this.canvas.add(node.label);
+            this.canvas.add(node.node);
+            this.canvas.add(node.node.label);
         });
 
         /**
          * Creating all lines.
          */
         graphInfo.links.forEach(linkInfo &#x3D;&gt; {
-            let sourceId: number &#x3D; this.nodes.findIndex( (node: Node, index: number, arr: Node[]) &#x3D;&gt;{
-                return node.id &#x3D;&#x3D;&#x3D; linkInfo.sourceId;
+            let sourceId: number &#x3D; this.nodes.findIndex( (node: NodeWrapper) &#x3D;&gt;{
+                return node.node.id &#x3D;&#x3D;&#x3D; linkInfo.sourceId;
             });
-            let targetId: number &#x3D; this.nodes.findIndex( (node: Node, index: number, arr: Node[]) &#x3D;&gt;{
-                return node.id &#x3D;&#x3D;&#x3D; linkInfo.targetId;
+            let targetId: number &#x3D; this.nodes.findIndex( (node: NodeWrapper) &#x3D;&gt;{
+                return node.node.id &#x3D;&#x3D;&#x3D; linkInfo.targetId;
             });
             let line: Line &#x3D; new Line(this.nodes[sourceId], this.nodes[targetId]);
-            this.nodes[sourceId].AddChild(this.nodes[targetId]);
-            this.nodes[sourceId].AddChildLine(line);
-            this.nodes[targetId].AddParent(this.nodes[sourceId]);
-            this.nodes[targetId].AddParentLine(line);
+            this.nodes[sourceId].node.AddChild(this.nodes[targetId]);
+            this.nodes[sourceId].node.AddChildLine(line);
+            this.nodes[targetId].node.AddParent(this.nodes[sourceId]);
+            this.nodes[targetId].node.AddParentLine(line);
             this.canvas.add(line);
             line.sendToBack();
         });
@@ -731,61 +697,35 @@ export class Graph {
      * @returns {boolean} Whether it was successfull.
      */
     public toggleActiveNode(): boolean{
-        if(this.activeNode.CanBeToggled()){
-            let newNode:Node &#x3D; this.activeNode.Toggle();
-            
-            /**
-             * Sets node behavior on mouse click.
-             * @param event 
-             */
+        if(this.activeNode.node.CanBeToggled()){
+            this.activeNode.Toggle(this.canvas);
+            let node &#x3D; this.activeNode;
+
             let mouseClick &#x3D; (event) &#x3D;&gt; {
-                if(this.activeNode !&#x3D; null &amp;&amp; this.activeNode !&#x3D; newNode){
-                    this.activeNode.SetIdle();
+                if(this.activeNode !&#x3D; null &amp;&amp; this.activeNode !&#x3D; node){
+                    this.activeNode.node.SetIdle();
                 }
-                newNode.SetActive();
-                this.activeNode &#x3D; newNode;
+                node.node.SetActive();
+                this.activeNode &#x3D; node;
             }
-            mouseClick &#x3D; mouseClick.bind(this, newNode);
-            newNode.on(&quot;mouseup&quot;, mouseClick);
+            mouseClick &#x3D; mouseClick.bind(this, node);
+            this.activeNode.node.on(&quot;mouseup&quot;, mouseClick);
 
-            /**
-             * Sets node behavior on mouse hover.
-             * @param event 
-             */
             let mouseHover &#x3D; (event) &#x3D;&gt;{
-                if(newNode.state &#x3D;&#x3D; NodeStates.Idle){
-                    newNode.SetHover();
+                if(node.node.state &#x3D;&#x3D; NodeStates.Idle){
+                    node.node.SetHover();
                 }
             }
-            mouseHover.bind(this, newNode);
-            
-            /**
-             * Sets node behavior on mouse leaving it.
-             * @param event 
-             */
-            let mouseUnHover &#x3D; (event) &#x3D;&gt;{
-                if(newNode.state &#x3D;&#x3D; NodeStates.Hover){
-                    newNode.SetIdle();
-                }
-            }
-            mouseUnHover.bind(this, newNode);
-            newNode.on(&quot;mouseover&quot;, mouseHover);
-            newNode.on(&quot;mouseout&quot;, mouseUnHover);
+            mouseHover &#x3D; mouseHover.bind(this, node);
+            this.activeNode.node.on(&quot;mouseover&quot;, mouseHover);
 
-            /**
-             * Stops rendering old node.
-             */
-            this.canvas.remove(this.activeNode);
-            this.canvas.remove(this.activeNode.label);
-            /**
-             * Starts rendering new node.
-             */
-            this.canvas.add(newNode);
-            this.canvas.add(newNode.label);
-            this.nodes.splice(this.nodes.indexOf(this.activeNode), 1);
-            delete this.activeNode;
-            this.nodes.push(newNode);
-            this.activeNode &#x3D; newNode;
+            let mouseLeave &#x3D; (event) &#x3D;&gt;{
+                if(node.node.state &#x3D;&#x3D; NodeStates.Hover){
+                    node.node.SetIdle();
+                }
+            }
+            mouseLeave &#x3D; mouseLeave.bind(this, node);
+            this.activeNode.node.on(&quot;mouseout&quot;, mouseLeave);
             this.canvas.requestRenderAll();
         }else{
             return false

@@ -1,5 +1,5 @@
 import { fabric } from 'fabric';
-import { Node } from './node';
+import { NodeWrapper } from './node-wrapper';
 
 /**
  * Class that represents line.
@@ -28,11 +28,11 @@ export class Line extends fabric.Line {
   /**
    * Instance of the node where line comes from.
    */
-  public source: Node;
+  public source: NodeWrapper;
   /**
    * Instance of the node where line comes in.
    */
-  public target: Node;
+  public target: NodeWrapper;
 
   /**
    * Constructor for the line
@@ -40,15 +40,15 @@ export class Line extends fabric.Line {
    * @param target Instance of the node where line comes in.
    */
   constructor(
-    source: Node,
-    target: Node
+    source: NodeWrapper,
+    target: NodeWrapper
   ) {
     let lineShadow: string | fabric.Shadow; 
     /**
      * Defines visuals of the line based on source and target nodes.
      */
-    if(source.isCompleted){
-      if(target.isCompleted){
+    if(source.node.isCompleted){
+      if(target.node.isCompleted){
         lineShadow = Line.activeShadow;
       }else{
         lineShadow = Line.semiActiveShadow;
@@ -56,7 +56,7 @@ export class Line extends fabric.Line {
     }else{
       lineShadow = Line.inactiveShadow;
     }
-    super([source.left, source.top, target.left, target.top], {
+    super([source.node.left, source.node.top, target.node.left, target.node.top], {
       stroke: Line.color,
       strokeWidth: Line.lineWidth,
       selectable: false,
@@ -87,6 +87,20 @@ export class Line extends fabric.Line {
     Line.activeShadow = activeShadow;
     Line.color = color;
     Line.lineWidth = width;
+  }
+
+  public UpdateVisuals(): void{
+    if(this.source.node.isCompleted === true){
+      if(this.target.node.isCompleted === true){
+        this.SetActive();
+      }
+      else{
+        this.SetSemiActive();
+      }
+    }
+    else{
+      this.SetInactive();
+    }
   }
 
   /**
