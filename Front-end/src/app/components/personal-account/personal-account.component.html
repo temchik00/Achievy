@@ -1,1 +1,44 @@
-<p>personal-account works!</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <mat-toolbar color="accent" class="header">
+        <button mat-icon-button color="primary" (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+        <span>Account information</span>
+    </mat-toolbar>
+    <mat-drawer-container class="contentWrapper" hasBackdrop="True">
+        <mat-drawer #drawer mode="Side">
+            <mat-nav-list>
+                <a mat-list-item routerLink="/browser">Найти дерево</a>
+                <a mat-list-item routerLink="" class="exitLink">Выйти</a>
+            </mat-nav-list>
+        </mat-drawer>
+        <div class="contentMainBar">
+            <div class="content">
+                <div class="nicknameWrapper">
+                    <p>kazzart</p>
+                </div>
+                <span class="midInfo">
+                    <mat-nav-list dense>
+                        <a mat-list-item class="listItem">Личные данные</a>
+                        <a mat-list-item class="listItem">Друзья</a>
+                        <a mat-list-item class="listItem">Сообщения</a>
+                        <a mat-list-item class="listItem">Личный сад</a>
+                        <a mat-list-item class="listItem">Настройки</a>
+                    </mat-nav-list>
+                </span>
+                <mat-divider [vertical]="true" class="midInfo divider"></mat-divider>
+                <span class="midInfo almostAvatarWrapper">
+                    <div class="almostAvatar">
+                        Добавьте аватар
+                    </div>
+                </span>
+                <!-- <img  class="images" src="assets/images/no-avatar.png"/> -->
+            </div>
+        </div>
+    </mat-drawer-container>
+</body>
+</html>

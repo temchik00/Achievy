@@ -1,1 +1,51 @@
-<p>graph-browser works!</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <mat-toolbar color="accent" class="header">
+        <button mat-icon-button color="primary" (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+        <span>Tree browser</span>
+    </mat-toolbar>
+    <mat-drawer-container class="contentWrapper" hasBackdrop="True">
+        <mat-drawer #drawer mode="Side">
+            <mat-nav-list>
+                <a mat-list-item routerLink="/account">Личный кабинет</a>
+                <a mat-list-item routerLink="" class="exitLink">Выйти</a>
+            </mat-nav-list>
+        </mat-drawer>
+        <div class="contentMainBar">
+            <mat-form-field class="treeInput" color="accent" appearance="fill">
+                <mat-chip-list #tagList aria-label="Tree selection">
+                    <mat-chip *ngFor="let tag of tags" selectable="false"
+                             removable="true" (removed)="remove(tag)">
+                      {{tag}}
+                      <mat-icon matChipRemove >cancel</mat-icon>
+                    </mat-chip> 
+                    <input matInput
+                    placeholder="Tree tags"
+                    [matChipInputFor]="tagList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
+            <mat-grid-list cols="4" rowHeight="2:1">
+                <mat-grid-tile routerLink="./graph">test tree</mat-grid-tile>
+                <mat-grid-tile>There</mat-grid-tile>
+                <mat-grid-tile>Must</mat-grid-tile>
+                <mat-grid-tile>be</mat-grid-tile>
+                <mat-grid-tile>much</mat-grid-tile>
+                <mat-grid-tile>more</mat-grid-tile>
+                <mat-grid-tile>trees</mat-grid-tile>
+                <mat-grid-tile>but</mat-grid-tile>
+                <mat-grid-tile>there</mat-grid-tile>
+                <mat-grid-tile>is</mat-grid-tile>
+                <mat-grid-tile>nothing</mat-grid-tile>
+                <mat-grid-tile>more</mat-grid-tile>
+              </mat-grid-list>
+        </div>
+    </mat-drawer-container>
+</body>
+</html>

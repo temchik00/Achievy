@@ -31,7 +31,7 @@ export class AuthorizationComponent implements OnInit {
   }
 
   public Login(){
-    this.router.navigate(["/graph"]);
+    this.router.navigate(["/account"]);
 
   }
 

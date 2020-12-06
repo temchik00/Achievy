@@ -6,27 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="wrapper">
+    <div class="wrapper" (window:resize)="onResize($event)">
         <div class="sidepanel" [ngStyle]="{
             'left': graph.activeNode == null ? '-220px' : '0px'
             }">
             <ng-template [ngIf]="graph.activeNode != null">
                 <div class="header-wrapper">
                     <span class="header">{{graph.activeNode.node.nodeName}}</span>
-                    <button mat-mini-fab color="primary" class="closeButton" (click)="closeSidePanel()">
+                    <button mat-icon-button color="primary" class="closeButton" (click)="closeSidePanel()">
                         <mat-icon>close</mat-icon>
                     </button>
                 </div>
                 <div class="description-header">Описание:</div>
-                <div class="description-wrapper">{{graph.activeNode.node.description}}</div>
+                <div class="description-wrapper"[ngStyle]="{
+                    'max-height': descriptionHeight
+                    }">{{graph.activeNode.node.description}}</div>
                 <button mat-raised-button [color]="graph.activeNode.node.isCompleted === true ? 'warn' : 'accent'" (click)="toggleSelectedNode()" class="toggleButton">{{graph.activeNode.node.isCompleted === true ? "Undone" : "Done"}}</button>
             </ng-template>
         </div>
         <div class="sideMenu" [ngStyle]="{
+            'visibility': menuExtended === true ? 'visible' : 'hidden',
             'left': menuPanelPos
             }">
-            <button mat-mini-fab color="accent" aria-label="Example icon button with a menu icon" class="menuButton" (click)="toggleMenuPanel()">
-                <mat-icon>menu</mat-icon>
+            <button mat-icon-button [color]="menuExtended === true ? 'primary' : 'accent'" aria-label="Example icon button with a menu icon" class="menuButton" (click)="toggleMenuPanel()" [ngStyle]="{
+                'left': menuExtended === true ? '-10px' : '-55px'
+            }">
+                <mat-icon>{{menuExtended === true ? "arrow_forward_ios" : "menu"}}</mat-icon>
             </button>
             <mat-nav-list>
                 <a mat-list-item routerLink="/account">Личный кабинет</a>

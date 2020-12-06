@@ -20,11 +20,14 @@ export class GraphViewerComponent implements OnInit {
   public graph:Graph;
   public menuPanelPos:string;
   public menuExtended:boolean;
+
+  public descriptionHeight:string;
   /**
    * Canvas on which objects are drawn.
    */
   private canvas:fabric.Canvas;
   constructor() {
+    this.descriptionHeight = (window.innerHeight * 0.82 - (28+8+5 + 20+3 + 30+5)).toString() + "px";
     this.menuPanelPos = (window.innerWidth).toString() + "px";
     this.menuExtended = false;
     UncompletedNode.Init(
@@ -128,7 +131,15 @@ export class GraphViewerComponent implements OnInit {
       this.menuPanelPos = (window.innerWidth-220).toString() + "px";
       this.menuExtended = true;
     }
+  }
 
+  public onResize(event) {
+    this.descriptionHeight = (window.innerHeight * 0.82 - (28+8+5 + 20+3 + 30+5)).toString() + "px";
+    if(this.menuExtended === true){
+      this.menuPanelPos = (window.innerWidth - 220).toString() + "px";
+    }else{
+      this.menuPanelPos = (window.innerWidth).toString() + "px";
+    }
   }
 
 }

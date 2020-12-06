@@ -15,6 +15,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { GraphBrowserComponent } from './components/graph-browser/graph-browser.component';
 import { PersonalAccountComponent } from './components/personal-account/personal-account.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+
+
 
 
 @NgModule({
@@ -34,7 +41,12 @@ import { PersonalAccountComponent } from './components/personal-account/personal
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatGridListModule,
+    MatChipsModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

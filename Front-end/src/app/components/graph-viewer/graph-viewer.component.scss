@@ -21,12 +21,12 @@ canvas {
 .sidepanel {
     z-index: 1;
     position: fixed; /* положение */
-    top: 100px; /* отступ сверху */
+    top: 9%; /* отступ сверху */
     background: #505050;
     background-color: rgb(80, 80, 80); /* цвет фона */
     color: #bbb; /* цвет текста */
     width: 200px; /* ширина блока */
-    height: 80vh; /* высота блока */
+    height: 82%; /* высота блока */
     padding: 10px; /* отступы от границ внутри блока */
     text-align: left; /* выравнивание текста */
   
@@ -43,12 +43,12 @@ canvas {
 .sideMenu {
     z-index: 1;
     position: fixed; /* положение */
-    top: 100px; /* отступ сверху */
+    top: 5%; /* отступ сверху */
     background: #505050;
     background-color: rgb(80, 80, 80); /* цвет фона */
     color: #bbb; /* цвет текста */
     width: 200px; /* ширина блока */
-    height: 80vh; /* высота блока */
+    height: 90%; /* высота блока */
     padding: 10px; /* отступы от границ внутри блока */
     text-align: left; /* выравнивание текста */
   
@@ -63,8 +63,9 @@ canvas {
 }
 
 .menuButton{
-    left:-55px;
+    visibility: visible;
     top:-10px;
+    box-shadow: none;
 }
 
 .closeButton {
@@ -72,10 +73,13 @@ canvas {
     text-shadow: none !important;
     box-shadow: none !important;
     outline: 0;
+    top: -18px;
+    left: 10px;
     cursor: pointer;
 }
 
 .header-wrapper{
+    margin-top: 8px;
     margin-bottom: 5px;
 }
 .header{
@@ -90,7 +94,6 @@ canvas {
 .description-wrapper{
     font-family: 'ComicSans';
     overflow-y: auto;
-    //height: 70.5vh;
     max-height: 88%;
 }
 

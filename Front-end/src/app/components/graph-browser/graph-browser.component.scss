@@ -1,0 +1,41 @@
+body{
+    height:100vh;
+    width: 100vw;
+}
+
+.header{
+    position: relative;
+    z-index: 1000;
+    height: 7%;
+    box-shadow: 0 0px 5px rgba(20,20,20,0.4); /* Параметры тени */
+}
+
+.contentWrapper{
+    height: 93%;
+}
+.treeInput{
+    width: 100%;
+}
+
+.contentMainBar{
+    position: fixed;
+    margin: auto;
+    left: 30%;
+    margin-top: 0px;
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    background-color: #373737;
+    box-shadow: 0 6px 6px rgba(20,20,20,0.5); /* Параметры тени */
+}
+
+mat-drawer-content {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+mat-grid-tile{
+    cursor: pointer;
+}

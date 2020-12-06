@@ -8,7 +8,7 @@ import { PersonalAccountComponent } from './components/personal-account/personal
 
 const routes: Routes = [
   {path: '', component: AuthorizationComponent},
-  {path: 'graph', component: GraphViewerComponent},
+  {path: 'browser/graph', component: GraphViewerComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'browser', component: GraphBrowserComponent},
   {path: 'account', component: PersonalAccountComponent}
