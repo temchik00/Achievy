@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpHandlerService } from 'src/app/shared/http-handler.service';
 
 @Component({
   selector: 'app-personal-account',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalAccountComponent implements OnInit {
 
-  constructor() { }
+  constructor( public httpHandler: HttpHandlerService ) { }
 
   ngOnInit(): void {
   }

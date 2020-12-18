@@ -20,7 +20,8 @@
             <div></div>
             <mat-form-field class="password" color="accent" appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" [errorStateMatcher]="matcher">
+                <input matInput formControlName="password" [errorStateMatcher]="matcher"  [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide" class="passwordButton">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                 <mat-error *ngIf="registrationForm.hasError('notSame') && !registrationForm.controls.password.hasError('required')">
                     Passwords do not match
                 </mat-error> 
@@ -31,7 +32,8 @@
             <div></div>
             <mat-form-field class="password" color="accent" appearance="fill">
                 <mat-label>Repeat password</mat-label>
-                <input matInput formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                <input matInput formControlName="confirmPassword" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="hide = !hide" class="passwordButton">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                 <mat-error *ngIf="registrationForm.controls.confirmPassword.hasError('required')">
                     Password is required
                 </mat-error>

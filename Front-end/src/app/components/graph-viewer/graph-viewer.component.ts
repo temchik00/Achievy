@@ -27,6 +27,7 @@ export class GraphViewerComponent implements OnInit {
    */
   private canvas:fabric.Canvas;
   constructor() {
+    console.log("constructor");
     this.descriptionHeight = (window.innerHeight * 0.82 - (28+8+5 + 20+3 + 30+5)).toString() + "px";
     this.menuPanelPos = (window.innerWidth).toString() + "px";
     this.menuExtended = false;
@@ -77,6 +78,7 @@ export class GraphViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("init");
     this.canvas = new fabric.Canvas("canvas", {
       selection: false,
       backgroundColor: "rgb(40,40,40)",
